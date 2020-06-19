@@ -1,14 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { WebMapView }from './components/WebMapView';
-import Card from './components/Card';
+import CardComponent from './components/CardComponent';
+import PersonList from './components/PersonList';
+import CountUp from 'react-countup';
+import './App.css'
+require('dotenv')
+
+// @TODO STYLE THE MAP
+const titleStyle = {
+    fontFamily: 'Helvetica',
+    fontSize: 30,
+    justifyContent: 'center',
+    textAlign: 'center',
+    marginTop: 75 
+}
+
+const coordsStyle = {
+    fontFamily: 'Helvetica',
+    fontSize: 50,
+    textAlign: 'center',
+}
 
 const App = () => {
-
     const [lat, setLat] = useState(0);
     const [long, setLong] = useState(0);
-    const [persons, setPersons] = useState(0);
+    const [numPersons, setNumPersons] = useState(0);
+    const [personsList, setPersonsList] = useState([]);
+    const [apod, setApod] = useState('');
 
+    // GET COORDS OF ISS
     useEffect(() => {
         axios.get('http://api.open-notify.org/iss-now.json')
             .then(res => {
@@ -21,12 +42,27 @@ const App = () => {
             })
     }, [])
 
+    // GET INFO ABOUT HOW MANY PEOPLE ARE IN SPACE
     useEffect(() => {
         axios.get('http://api.open-notify.org/astros.json')
             .then (res => {
-                setPersons(() => res.data.number);
+                let list = [];
+                setNumPersons(() => res.data.number);
+                res.data.people.map(pr => list.push(pr.name));
+                setPersonsList(() => list);
             })
             .catch (err => {
+                console.log(err);
+            })
+    }, [])
+
+    // NASA APOD
+    useEffect(() => {
+        axios.get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API_KEY}`)
+            .then(res => {
+                setApod(() => [res.data.url, res.data.copyright, res.data.date]);
+            })
+            .catch(err => {
                 console.log(err);
             })
     }, [])
@@ -35,10 +71,30 @@ const App = () => {
 
     return(
         <React.Fragment>
-            <h1>Where is the International Space Station?</h1>
-            The ISS is at latitude {lat} and longitude {long}
-            <WebMapView lat={lat} long={long}/>
-            <Card num={persons}/>
+        <div style={titleStyle}>The International Space Station is at</div>
+        <div style={coordsStyle}>[
+            {/* LATITUDE */}
+            <CountUp 
+                start={-90}
+                end={lat}
+                duration={.75}
+            />, 
+            {/* LONGITUDE */}
+            <CountUp 
+                start={-180}
+                end={long}
+                duration={.75}
+            />
+        ]</div>
+        <div><WebMapView lat={lat} long={long}/></div>
+        <div style={titleStyle}>There are {numPersons} people aboard the ISS right now. They are:</div>
+
+        <PersonList list={personsList} />
+
+
+        <CardComponent 
+            apod={apod}
+        />
         </React.Fragment>
 
     );

@@ -4,12 +4,14 @@
   "private": true,
   "dependencies": {
     "@arcgis/webpack-plugin": "^4.15.0",
+    "@material-ui/core": "^4.10.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "esri-loader": "^2.14.0",
     "react": "^16.13.1",
+    "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
@@ -35,6 +37,7 @@
     ]
   },
   "devDependencies": {
-    "calcite-web": "github:Esri/calcite-web#v1.2.5"
+    "calcite-web": "github:Esri/calcite-web#v1.2.5",
+    "dotenv": "^8.2.0"
   }
 }

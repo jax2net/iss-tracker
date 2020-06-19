@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { loadModules } from 'esri-loader';
 
 export const WebMapView = (props) => {
-    console.log(props);
     const mapRef = useRef();
 
     useEffect(
@@ -38,7 +37,7 @@ export const WebMapView = (props) => {
                         container: mapRef.current,
                         map: map,
                         center: [-118, 35],
-                        zoom: 2
+                        zoom: 1,
                     });
 
                     view.graphics.add(posGraphic);
@@ -55,5 +54,5 @@ export const WebMapView = (props) => {
         }
     );
 
-    return <div className="webmap" ref={mapRef} style={{height:'400px',}}/>;
+    return <div className="webmap" ref={mapRef} style={{ height:'400px',}}/>;
 };
