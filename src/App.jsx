@@ -5,6 +5,7 @@ import CardComponent from './components/CardComponent';
 import PersonList from './components/PersonList';
 import CountUp from 'react-countup';
 import './App.css'
+import { hexToRgb } from '@material-ui/core';
 require('dotenv')
 
 // @TODO STYLE THE MAP
@@ -41,6 +42,7 @@ const App = () => {
                 console.log(err);
             })
     }, [])
+
 
     // GET INFO ABOUT HOW MANY PEOPLE ARE IN SPACE
     useEffect(() => {
@@ -88,9 +90,9 @@ const App = () => {
         ]</div>
         <div><WebMapView lat={lat} long={long}/></div>
         <div style={titleStyle}>There are {numPersons} people aboard the ISS right now. They are:</div>
+        <br />
 
         <PersonList list={personsList} />
-
 
         <CardComponent 
             apod={apod}

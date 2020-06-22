@@ -1,10 +1,12 @@
 import React from 'react';
 import Person from './Person';
+import { hexToRgb } from '@material-ui/core';
 
 const listStyle = {
     fontFamily: 'Helvetica',
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
+    padding: 10
 }
 
 const PersonList = (props) => {

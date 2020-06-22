@@ -38,6 +38,9 @@ export const WebMapView = (props) => {
                         map: map,
                         center: [-118, 35],
                         zoom: 1,
+                        ui: {
+                            components: ["attribution"]
+                        }
                     });
 
                     view.graphics.add(posGraphic);
