@@ -1,8 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles, hexToRgb }from '@material-ui/core/styles';
-import { createMuiTheme }from '@material-ui/core/styles';
+import { hexToRgb }from '@material-ui/core/styles';
 
 
 const cardStyle = {

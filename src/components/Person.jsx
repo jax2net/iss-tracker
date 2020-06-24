@@ -11,7 +11,7 @@ const PersonStyle = {
 const Person = (props) => {
     return(
         <React.Fragment>
-        <a style={PersonStyle} href={`https://en.wikipedia.org/wiki/${props.name}`}>{props.name}</a>
+        <a style={PersonStyle} href={`https://en.wikipedia.org/wiki/${props.name}`} target="_blank">{props.name}</a>
         <br />
         <br />
         </React.Fragment>

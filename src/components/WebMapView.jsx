@@ -10,7 +10,7 @@ export const WebMapView = (props) => {
             loadModules(['esri/Map', 'esri/views/MapView', 'esri/Graphic'], { css: true })
                 .then(([ArcGISMap, MapView, Graphic]) => {
                     const map = new ArcGISMap({
-                        basemap: 'topo-vector'
+                        basemap: 'dark-gray'
                     });
 
                     let pos = {

@@ -1,26 +1,34 @@
+// @TODO Clean up import statements
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { WebMapView }from './components/WebMapView';
+import { WebMapView } from './components/WebMapView';
 import CardComponent from './components/CardComponent';
 import PersonList from './components/PersonList';
 import CountUp from 'react-countup';
-import './App.css'
-import { hexToRgb } from '@material-ui/core';
+import './styles/App.css'
+import { Row, Container, Col } from 'react-bootstrap';
 require('dotenv')
 
-// @TODO STYLE THE MAP
 const titleStyle = {
     fontFamily: 'Helvetica',
     fontSize: 30,
     justifyContent: 'center',
     textAlign: 'center',
-    marginTop: 75 
+    marginTop: 75
 }
 
 const coordsStyle = {
     fontFamily: 'Helvetica',
     fontSize: 50,
     textAlign: 'center',
+}
+
+const mapStyle = {
+    width: 600,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    
 }
 
 const App = () => {
@@ -47,13 +55,13 @@ const App = () => {
     // GET INFO ABOUT HOW MANY PEOPLE ARE IN SPACE
     useEffect(() => {
         axios.get('http://api.open-notify.org/astros.json')
-            .then (res => {
+            .then(res => {
                 let list = [];
                 setNumPersons(() => res.data.number);
                 res.data.people.map(pr => list.push(pr.name));
                 setPersonsList(() => list);
             })
-            .catch (err => {
+            .catch(err => {
                 console.log(err);
             })
     }, [])
@@ -71,36 +79,40 @@ const App = () => {
 
 
 
-    return(
+    return (
         <React.Fragment>
-        <div style={titleStyle}>The International Space Station is at</div>
-        <div style={coordsStyle}>[
+            <div style={titleStyle}>The International Space Station is at</div>
+            <div style={coordsStyle}>[
             {/* LATITUDE */}
-            <CountUp 
-                start={-90}
-                end={lat}
-                duration={.75}
-            />, 
+                <CountUp
+                    start={-90}
+                    end={lat}
+                    duration={.75}
+                />,
             {/* LONGITUDE */}
-            <CountUp 
-                start={-180}
-                end={long}
-                duration={.75}
-            />
+                <CountUp
+                    start={-180}
+                    end={long}
+                    duration={.75}
+                />
         ]</div>
-        <div><WebMapView lat={lat} long={long}/></div>
-        <div style={titleStyle}>There are {numPersons} people aboard the ISS right now. They are:</div>
-        <br />
+        <Container>
+            <Row className="text-center">
+                <Col xs={4}><WebMapView lat={lat} long={long} /></Col>
+            </Row>
+        </Container>
 
-        <PersonList list={personsList} />
+            <div style={titleStyle}>There are {numPersons} people aboard the ISS right now. They are:</div>
+            <br />
 
-        <CardComponent 
-            apod={apod}
-        />
+            <PersonList list={personsList} />
+
+            <CardComponent
+                apod={apod}
+            />
         </React.Fragment>
 
     );
-
 }
 
 export default App;
