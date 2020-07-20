@@ -1,6 +1,5 @@
 import React from 'react';
 import Person from './Person';
-import { hexToRgb } from '@material-ui/core';
 
 const listStyle = {
     fontFamily: 'Helvetica',

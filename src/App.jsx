@@ -28,8 +28,10 @@ const mapStyle = {
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    
+
 }
+
+
 
 const App = () => {
     const [lat, setLat] = useState(0);

@@ -46,7 +46,6 @@ export const WebMapView = (props) => {
                     view.graphics.add(posGraphic);
 
 
-
                     return () => {
                         if (view) {
                             // destroy the map view
