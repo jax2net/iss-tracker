@@ -1,0 +1,1 @@
+{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,KACI,wBAAyB,CACzB,aAAiB,CACjB,sBAAuB,CACvB,kBAAmB,CACnB,iBACJ","file":"main.4fc567b5.chunk.css","sourcesContent":["html {\n    background-color: #1A2052;\n    color: whitesmoke;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n}\n"]}
